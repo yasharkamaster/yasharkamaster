@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasharka's Interactive GitHub Universe</title>
+    <meta name="description" content="Explore Yasharka's world of interactive games, AI projects, and innovative applications!">
+    <meta name="keywords" content="developer, games, AI, interactive, portfolio, GitHub, Yasharka">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Yasharka's Interactive GitHub Universe">
+    <meta property="og:description" content="Explore amazing interactive games, AI projects, and innovative applications!">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/667eea/ffffff?text=Interactive+GitHub+Universe">
+    <meta property="og:url" content="https://github.com/YasharkaBhattacharyya">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            --accent-color: #4ECDC4;
+            --text-primary: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--primary-gradient);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #ff6b6b, #4ecdc4);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: floatParticle 20s linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) translateX(200px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Header */
+        .header {
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-title {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #FFD700, #96CEB4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            opacity: 0.9;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Interactive Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+            padding: 0 20px;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: var(--accent-color);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Apps Grid */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .apps-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .app-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--accent-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .app-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .app-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            border-color: var(--accent-color);
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .app-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover .app-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .app-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+        }
+
+        .app-subtitle {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .app-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .app-features {
+            display: flex;
+ sender="flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .feature-tag {
+            background: rgba(78, 205, 196, 0.2);
+            color: var(--accent-color);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+        }
+
+        .play-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .play-button:hover {
+            background: linear-gradient(45deg, #4ECDC4, #FF6B6B);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .play-button::before {
+            content: '▶';
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .play-button:hover::before {
+            transform: translateX(2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 50%;
+            text-decoration: none;
+            color: inherit;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            border-color: var(--accent-color);
+            background: rgba(78, 205, 196, 0.2);
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-emojis {
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stat-card, .app-card {
+                padding: 20px;
+            }
+
+            .welcome-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Typing Effect */
+        .typing-text {
+            overflow: hidden;
+            border-right: 2px solid var(--accent-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-color); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <h1 class="welcome-title">🚀 Welcome to Yasharka's Interactive Universe!</h1>
+        <p class="subtitle typing-text">Where Games, AI, and Innovation Collide ⚡</p>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card fade-in">
+                <span class="stat-icon">🎮</span>
+                <div class="stat-number" data-target="7">0</div>
+                <div class="stat-label">Interactive Games</div>
+            </div>
+            <div class="stat-card fade-in">
+                <span class="stat-icon">🤖</span>
+                <div class="stat-number" data-target="5">0</div>
+                <div class="stat-label">AI Projects</div>
+            </div>
+            <div class="stat-card fade-in">
+                <span class="stat-icon">⚡</span>
+                <div class="stat-number" data-target="500">0</div>
+                <div class="stat-label">GitHub Stars</div>
+            </div>
+            <div class="stat-card fade-in">
+                <span class="stat-icon">🔥</span>
+                <div class="stat-number" data-target="15">0</div>
+                <div class="stat-label">Total Projects</div>
+            </div>
+        </div>
+
+        <!-- Interactive Apps Section -->
+        <section class="apps-section">
+            <h2 class="section-title fade-in">🎮 Interactive Games & Applications</h2>
+            
+            <div class="apps-grid">
+                <!-- Portfolio Dashboard -->
+                <div class="app-card fade-in" onclick="openApp('skill_radar.html')">
+                    <div class="app-header">
+                        <span class="app-icon">🥇</span>
+                        <div>
+                            <h3 class="app-title">Interactive Portfolio Dashboard</h3>
+                            <p class="app-subtitle">Skills Visualization & Project Showcase</p>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        Explore my skills through an animated radar chart with multiple categories, project highlights, 
+                        and interactive achievements showcase.
+                    </p>
+                    <div class="app-features">
+                        <span class="feature-tag">Skill Radar</span>
+                        <span class="feature-tag">Project Showcase</span>
+                        <span class="feature-tag">Achievements</span>
+                        <span class="feature-tag">Animations</span>
+                    </div>
+                    <button class="play-button">Explore Dashboard</button>
+                </div>
+
+                <!-- Memory Game -->
+                <div class="app-card fade-in" onclick="openApp('memory_game.html')">
+                    <div class="app-header">
+                        <span class="app-icon">🧠</span>
+                        <div>
+                            <h3 class="app-title">Memory Card Matching</h3>
+                            <p class="app-subtitle">Test Your Memory Skills</p>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        Challenge your memory with customizable difficulty levels, combo scoring system, 
+                        and achievement tracking with beautiful animations.
+                    </p>
+                    <div class="app-features">
+                        <span class="feature-tag">Multi-Difficulty</span>
+                        <span class="feature-tag">Scoring System</span>
+                        <span class="feature-tag">Leaderboard</span>
+                        <span class="feature-tag">Achievements</span>
+                    </div>
+                    <button class="play-button">Play Memory Game</button>
+                </div>
+
+                <!-- Typing Test -->
+                <div class="app-card fade-in" onclick="openApp('typing_game.html')">
+                    <div class="app-header">
+                        <span class="app-icon">⌨️</span>
+                        <div>
+                            <h3 class="app-title">Typing Speed Test</h3>
+                            <p class="app-subtitle">Challenge Your Typing Skills</p>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        Test your typing speed and accuracy with multiple difficulty levels, 
+                        real-time WPM tracking, and personal statistics.
+                    </p>
+                    <div class="app-features">
+                        <span class="feature-tag">Real-time Stats</span>
+                        <span class="feature-tag">WPM Tracking</span>
+                        <span class="feature-tag">Accuracy Meter</span>
+                        <span class="feature-tag">Difficulty Levels</span>
+                    </div>
+                    <button class="play-button">Start Typing Test</button>
+                </div>
+
+                <!-- Snake Game -->
+                <div class="app-card fade-in" onclick="openApp('snake_game.html')">
+                    <div class="app-header">
+                        <span class="app-icon">🐍</span>
+                        <div>
+                            <h3 class="app-title">Snake Game</h3>
+                            <p class="app-subtitle">Classic Snake with Modern Features</p>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        Enjoy the classic Snake game with modern enhancements, multiple speed levels, 
+                        and beautiful visual effects for an enhanced gaming experience.
+                    </p>
+                    <div class="app-features">
+                        <span class="feature-tag">Speed Control</span>
+                        <span class="feature-tag">High Score</span>
+                        <span class="feature-tag">Mobile Support</span>
+                        <span class="feature-tag">Visual Effects</span>
+                    </div>
+                    <button class="play-button">Play Snake</button>
+                </div>
+
+                <!-- Tetris -->
+                <div class="app-card fade-in" onclick="openApp('tetris_game.html')">
+                    <div class="app-header">
+                        <span class="app-icon">🎮</span>
+                        <div>
+                            <h3 class="app-title">Tetris</h3>
+                            <p class="app-subtitle">Classic Puzzle Adventure</p>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        Experience the timeless Tetris gameplay with modern features, level progression, 
+                        scoring system, and smooth animations.
+                    </p>
+                    <div class="app-features">
+                        <span class="feature-tag">Level System</span>
+                        <span class="feature-tag">Scoring</span>
+                        <span class="feature-tag">Smooth Controls</span>
+                        <span class="feature-tag">Progression</span>
+                    </div>
+                    <button class="play-button">Play Tetris</button>
+                </div>
+
+                <!-- Chess Game -->
+                <div class="app-card fade-in" onclick="openApp('chess_game.html')">
+                    <div class="app-header">
+                        <span class="app-icon">♔</span>
+                        <div>
+                            <h3 class="app-title">Chess Game</h3>
+                            <p class="app-subtitle">Strategic Board Game</p>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        Master the classic game of chess with full rule implementation, 
+                        move validation, hint system, and beautiful game interface.
+                    </p>
+                    <div class="app-features">
+                        <span class="feature-tag">Full Chess Rules</span>
+                        <span class="feature-tag">Move Validation</span>
+                        <span class="feature-tag">Hint System</span>
+                        <span class="feature-tag">Game Analysis</span>
+                    </div>
+                    <button class="play-button">Play Chess</button>
+                </div>
+
+                <!-- Music Player -->
+                <div class="app-card fade-in" onclick="openApp('music_player.html')">
+                    <div class="app-header">
+                        <span class="app-icon">🎵</span>
+                        <div>
+                            <h3 class="app-title">Interactive Music Player</h3>
+                            <p class="app-subtitle">Create & Enjoy Music</p>
+                        </div>
+                    </div>
+                    <p class="app-description">
+                        Create custom playlists and enjoy music with beautiful audio visualizations, 
+                        genre filtering, and interactive controls.
+                    </p>
+                    <div class="app-features">
+                        <span class="feature-tag">Audio Visualizations</span>
+                        <span class="feature-tag">Playlist Builder</span>
+                        <span class="feature-tag">Genre Filtering</span>
+                        <span class="feature-tag">Volume Control</span>
+                    </div>
+                    <button class="play-button">Open Music Player</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://github.com/YasharkaBhattacharyya" class="social-link" target="_blank" title="GitHub">💻</a>
+            <a href="https://www.linkedin.com/in/yasharka/" class="social-link" target="_blank" title="LinkedIn">💼</a>
+            <a href="https://twitter.com/YasharkaBh" class="social-link" target="_blank" title="Twitter">🐦</a>
+            <a href="https://titlastudio.com" class="social-link" target="_blank" title="Portfolio">🌐</a>
+        </div>
+        
+        <p class="footer-text">
+            🚀 Interactive GitHub Profile powered by HTML5, JavaScript & Pure Creativity ⚡
+        </p>
+        
+        <div class="footer-emojis">
+            💝 ⭐ 🎮 🚀 🎊
+        </div>
+    </footer>
+
+    <script>
+        // Particle System Creation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            // Colors for particles
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FECA57', '#FF9FF3'];
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random properties
+                const size = Math.random() * 6 + 2;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 20;
+                
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.background = color;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.boxShadow = `${color} 0 0 ${size * 3}px`;
+                particle.style.animation = `floatParticle ${duration}s linear infinite`;
+                particle.style.animationDelay = delay + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number[data-target]');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.target);
+                const increment = target / 100; // Animation duration control
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Scroll Animation
+        function handleScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Open App Function
+        function openApp(filename) {
+            // Add click animation
+            const cards = document.querySelectorAll('.app-card');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    card.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        card.style.transform = '';
+                    }, 150);
+                });
+            });
+            
+            // Open in new tab
+            window.open(filename, '_blank');
+        }
+
+        // Loading Screen Management
+        function hideLoadingScreen() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            setTimeout(() => {
+                loadingOverlay.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                }, 500);
+            }, 1500);
+        }
+
+        // Keyboard Shortcuts
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                // Quick access shortcuts
+                switch(e.key) {
+                    case '1': openApp('skill_radar.html'); break;
+                    case '2': openApp('memory_game.html'); break;
+                    case '3': openApp('typing_game.html'); break;
+                    case '4': openApp('snake_game.html'); break;
+                    case '5': openApp('tetris_game.html'); break;
+                    case '6': openApp('chess_game.html'); break;
+                    case '7': openApp('music_player.html'); break;
+                }
+            });
+        }
+
+        // Mouse Trail Effect
+        function createMouseTrail() {
+            const trail = [];
+            const trailLength = 15;
+            
+            document.addEventListener('mousemove', (e) => {
+                trail.push({ x: e.clientX, y: e.clientY, time: Date.now() });
+                
+                if (trail.length > trailLength) {
+                    trail.shift();
+                }
+                
+                // Remove old trail elements
+                document.querySelectorAll('.mouse-trail').forEach(el => {
+                    if (Date.now() - el.dataset.time > 200) {
+                        el.remove();
+                    }
+                });
+                
+                // Create new trail element
+                const trailElement = document.createElement('div');
+                trailElement.className = 'mouse-trail';
+                trailElement.style.position = 'fixed';
+                trailElement.style.left = e.clientX + 'px';
+                trailElement.style.top = e.clientY + 'px';
+                trailElement.style.width = '8px';
+                trailElement.style.height = '8px';
+                trailElement.style.background = '#4ECDC4';
+                trailElement.style.borderRadius = '50%';
+                trailElement.style.pointerEvents = 'none';
+                trailElement.style.zIndex = '9998';
+                trailElement.style.opacity = '0.6';
+                trailElement.dataset.time = Date.now();
+                
+                document.body.appendChild(trailElement);
+            });
+        }
+
+        // Initialize Everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            handleScrollAnimations();
+            setupKeyboardShortcuts();
+            
+            // Hide loading screen after initialization
+            hideLoadingScreen();
+            
+            // Start counter animation when stats section is visible
+            setTimeout(() => {
+                animateCounters();
+            }, 1000);
+            
+            // Mouse trail effect (optional - uncomment to enable)
+            // createMouseTrail();
+            
+            // Add entrance animations
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 500);
+        });
+
+        // Preload critical assets
+        function preloadAssets() {
+            const criticalFiles = [
+                'skill_radar.html',
+                'memory_game.html',
+                'typing_game.html'
+            ];
+            
+            criticalFiles.forEach(file => {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = file;
+                document.head.appendChild(link);
+            });
+        }
+
+        // Run preloading
+        preloadAssets();
+
+        // Performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log(`⚡ Page loaded in ${perfData.loadEventEnd - perfData.fetchStart}ms`);
+                }, 0);
+            });
+        }
+
+        // Easter egg - Konami code
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.keyCode);
+            
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                alert('🎮 Konami Code Activated! You found the easter egg! 🎮');
+                // Trigger special effect
+                document.body.style.animation = 'rainbow 2s infinite';
+                konamiCode = [];
+            }
+        });
+    </script>
+
+    <style>
+        /* Rainbow easter egg animation */
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        /* Mouse trail styles */
+        .mouse-trail {
+            animation: trailFade 0.3s ease-out forwards;
+        }
+        
+        @keyframes trailFade {
+            from { opacity: 0.8; transform: scale(1); }
+            to { opacity: 0; transform: scale(0); }
+        }
+        
+        /* Prevent text selection on cards */
+        .app-card {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --glass-bg: rgba(0, 0, 0, 0.2);
+                --glass-border: rgba(255, 255, 255, 0.1);
+            }
+        }
+    </style>
+</body>
+
+</html>
