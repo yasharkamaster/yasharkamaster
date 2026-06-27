@@ -1,4 +1,4 @@
-```md
+
 # Hi there 👋, I'm Yasharka Bhattacharyya
 
 <div align="center">
@@ -124,4 +124,3 @@ An AI-powered digital twin that understands users' routines, habits, and prefere
 *"Dream big. Build bigger."* 🚀
 
 </div>
-```
